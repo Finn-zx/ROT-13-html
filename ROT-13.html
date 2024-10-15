@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Kriptografi ROT-13</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #4CAF50; /* Warna hijau */
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .box {
+      width: 300px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    #result {
+      background-color: #e6ffe6;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>APLIKASI WEB KRIPTOGRAFI ROT-13</h1>
+    <div class="container">
+      <!-- Input Text Area -->
+      <div class="box">
+        <textarea id="input-text" placeholder="Masukkan teks"></textarea>
+      </div>
+
+      <!-- Encrypted Result Area -->
+      <div class="box">
+        <textarea id="result" readonly placeholder="Hasil enkripsi"></textarea>
+      </div>
+    </div>
+    <button onclick="encrypt()">Enkripsi</button>
+  </div>
+
+  <script>
+    function rot13(str) {
+      return str.replace(/[A-Za-z]/g, function (c) {
+        return String.fromCharCode(
+          ((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13)) ? c : c - 26
+        );
+      });
+    }
+
+    function encrypt() {
+      let inputText = document.getElementById("input-text").value;
+      let encryptedText = rot13(inputText);
+      document.getElementById("result").value = encryptedText;
+    }
+  </script>
+</body>
+</html>
